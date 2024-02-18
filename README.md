@@ -6,14 +6,14 @@ This project is able to solve any problem that can be represented as a path from
 Artificial Intelligence can be divided into two steps: Representation and Search.
 
 For any problem you need to represent it. To represent a problem you need to define:
-  An Initial State(IS) - In this case I will represent it as a C++ object.
-  A Solution State(SS) - In this case I will also represent it as a C++ object.
-  A set of operands - This can vary based on what problem you are trying to solve. I have a function called get_successors(T state1) which returns a vector of T objects representing all the possible states you can go to from state1. Or all successors of state1.
+- An Initial State(IS) - In this case I will represent it as a C++ object.
+- A Solution State(SS) - In this case I will also represent it as a C++ object.
+- A set of operands - This can vary based on what problem you are trying to solve. I have a function called get_successors(T state1) which returns a vector of T objects representing all the possible states you can go to from state1. Or all successors of state1.
 
 After you represent a problem you can search it using any searching algorithm. They all have their pros and cons so you need to pick the best algorithm based on your case. A list of searching algorithms are:
-  breadth-first-search(BFS)
-  depth-first-search(DFS)
-  best-first-search(BestFS)
+- breadth-first-search(BFS)
+- depth-first-search(DFS)
+- best-first-search(BestFS)
   
 To search the problem you start at the initial state, then all the successors of the initial state, which you get through the get_successors function explained above, are connected to that state. This creates a graph where you can perform your searching algorithm on until you find the solution state. You want to keep track of the paths in order to know what steps to take from the IS to the SS.
 
@@ -58,6 +58,10 @@ To run the tests:
 ```
 g++ src/*.cpp -o program && ./program
 ```
+
+make sure you are in the cloned directory as the above command is a relative path.
+
+
 ### Small Description of the class:
 
 The General_AI class is an object that is used to solve any problem that can be represented as a state space search problem.
@@ -78,6 +82,7 @@ If you do not want to implement those methods as member functions of the class, 
 
 ### Here is the ADT for the GeneralAI object:
 
+```
 Precondition: If the get_successors and is_goal function pointers are not passed in, the T class must have the methods implemented.
 Postcondition: It creates a valid General_AI object that uses the passed in searching algorithm to solve the problem. Default is breadth first search.
 General_AI(T initial_state, bool (*is_goal)(T) = NULL, std::vector<T> (*get_successors)(T) = NULL, searching_algorithm = BFS);
@@ -85,22 +90,20 @@ General_AI(T initial_state, bool (*is_goal)(T) = NULL, std::vector<T> (*get_succ
 Precondition: The calling object is a valid General_AI object
 Postcondition: It will return a vector of the states that lead from the initial state to the goal state.
 std::vector<T> solve();
-
+  
 Precondition: The passed in argument is a vector of T objects where T has the << operator overloaded to be used with cout.
 Postcondition: It will print the vector one item at a time to the cout stream. // This is a non member function so it should not have a calling object. ai.print_solution() is not valid.
 void print_solution(std::vector<T> solution);
-
-
-make sure you are in the cloned directory as the above command is a relative path.
+```
 
 ## Moving Forward
 
 Moving forward I want to implement more and more searching algorithms as the ones implemented so far have their downsides. So far the only implemented searching algorithm are:
-  breadth-first-search(BFS)
+- breadth-first-search(BFS)
 
 Searching algorithms I want to implement:
-  depth-first-search(DFS)
-  best-first-search(BestFS) - this will require a heuristics
+- depth-first-search(DFS)
+- best-first-search(BestFS) - this will require a heuristics
 
 Other things needed to be implemented:
   - multiple constructors and more error handling. I want to use only std errors.
